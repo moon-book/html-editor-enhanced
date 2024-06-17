@@ -54,7 +54,11 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   @override
   Future<String> getText() async {
     _evaluateJavascriptWeb(data: {'type': 'toIframe: getText'});
-    var e = await html.window.onMessage.firstWhere((element) => json.decode(element.data)['type'] == 'toDart: getText');
+    var e = await html.window.onMessage.firstWhere((element) {
+      final jsonMsg = json.decode(element.data);
+      return jsonMsg['type'] == 'toDart: getText' && jsonMsg['view'] == _viewId;
+    });
+
     String text = json.decode(e.data)['text'];
     if (processOutputHtml && (text.isEmpty || text == '<p></p>' || text == '<p><br></p>' || text == '<p><br/></p>')) text = '';
     return text;

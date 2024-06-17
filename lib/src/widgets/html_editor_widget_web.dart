@@ -246,7 +246,7 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
             if (data["view"].includes("$createdViewId")) {
               if (data["type"].includes("getText")) {
                 var str = \$('#summernote-2').summernote('code');
-                window.parent.postMessage(JSON.stringify({"type": "toDart: getText", "text": str}), "*");
+                window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: getText", "text": str}), "*");
               }
               if (data["type"].includes("getHeight")) {
                 var height = document.body.scrollHeight;
