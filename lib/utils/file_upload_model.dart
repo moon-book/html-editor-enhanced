@@ -20,6 +20,7 @@ class FileUpload {
     this.name,
     this.size,
     this.type,
+    this.maxWidth,
   });
 
   /// The base64 string of the file.
@@ -43,6 +44,9 @@ class FileUpload {
   /// The content-type (eg. image/jpeg) of the file
   String? type;
 
+  /// max-width css style
+  int? maxWidth;
+
   /// Creates an instance of [FileUpload] from a JSON string
   factory FileUpload.fromJson(Map<String, dynamic> json) => FileUpload(
         base64: json['base64'],
@@ -55,5 +59,6 @@ class FileUpload {
         name: json['name'],
         size: json['size'],
         type: json['type'],
+        maxWidth: json['maxWidth'],
       );
 }
