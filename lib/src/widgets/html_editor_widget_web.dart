@@ -265,7 +265,7 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
                 \$('#summernote-2').summernote('focus');
               }
               if (data["type"].includes("clear")) {
-                \$('#summernote-2').summernote('reset');
+                \$('#summernote-2').summernote('code', '');
               }
               if (data["type"].includes("setHint")) {
                 \$(".note-placeholder").html(data["text"]);
