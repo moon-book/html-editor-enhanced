@@ -227,6 +227,21 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
             disableGrammar: false,
             spellCheck: ${widget.htmlEditorOptions.spellCheck},
             maximumFileSize: $maximumFileSize,
+            imageAttributes: {
+              icon: '<i class="note-icon-pencil"/>',
+              figureClass: 'figureClass',
+              figcaptionClass: 'captionClass',
+              captionText: 'Caption Goes Here.',
+              manageAspectRatio: true // true = Lock the Image Width/Height, Default to true
+            },
+            lang: 'en-US',
+            popover: {
+              image: [
+                ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],,
+                ['remove', ['removeMedia']],
+                ['custom', ['imageAttributes']],
+              ],
+            },
             ${widget.htmlEditorOptions.customOptions}
             $summernoteCallbacks
           });
@@ -469,7 +484,9 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
         .replaceFirst('<!--summernoteScripts-->', summernoteScripts)
         .replaceFirst('"jquery.min.js"', '"assets/packages/html_editor_enhanced/assets/jquery.min.js"')
         .replaceFirst('"summernote-lite.min.css"', '"assets/packages/html_editor_enhanced/assets/summernote-lite.min.css"')
-        .replaceFirst('"summernote-lite.min.js"', '"assets/packages/html_editor_enhanced/assets/summernote-lite.min.js"');
+        .replaceFirst('"summernote-lite.min.js"', '"assets/packages/html_editor_enhanced/assets/summernote-lite.min.js"')
+        .replaceFirst('"summernote-image-attributes.js"', '"assets/packages/html_editor_enhanced/assets/plugins/summernote-image-attribute-editor/summernote-image-attributes.js"')
+        .replaceFirst('"en-us.js"', '"assets/packages/html_editor_enhanced/assets/plugins/summernote-image-attribute-editor/lang/en-us.js"');
     if (widget.callbacks != null) addJSListener(widget.callbacks!);
 
     final iframe = html.IFrameElement()
