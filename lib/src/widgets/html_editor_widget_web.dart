@@ -479,6 +479,8 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
     }
     var htmlString = await rootBundle.loadString(filePath);
     htmlString = htmlString
+        .replaceFirst('"bootstrap.min.js"', '"assets/packages/html_editor_enhanced/assets/bootstrap.min.js"')
+        .replaceFirst('"bootstrap.min.css"', '"assets/packages/html_editor_enhanced/assets/bootstrap.min.css"')
         .replaceFirst('<!--darkCSS-->', darkCSS)
         .replaceFirst('<!--headString-->', headString)
         .replaceFirst('<!--summernoteScripts-->', summernoteScripts)
