@@ -98,6 +98,7 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
         onInit: function(e) {
           resizeObserver.observe(document.querySelector('.note-editor'));
           \$('.note-editable').css('background-color', 'white');
+          \$('#summernote-2').summernote('code', '');
         },
     ''';
     var maximumFileSize = 10485760;
