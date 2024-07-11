@@ -179,7 +179,7 @@ class HtmlToolbarOptions {
     this.buttonSplashColor,
     this.buttonBorderColor,
     this.buttonSelectedBorderColor,
-    this.buttonBorderRadius,
+    this.buttonBorderRadius = const BorderRadius.all(Radius.circular(2)),
     this.buttonBorderWidth,
     this.renderBorder = false,
     this.textStyle,
