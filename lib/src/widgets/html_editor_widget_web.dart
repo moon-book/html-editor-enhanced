@@ -469,8 +469,10 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
         .replaceFirst('<!--headString-->', headString)
         .replaceFirst('<!--summernoteScripts-->', summernoteScripts)
         .replaceFirst('"jquery.min.js"', '"assets/packages/html_editor_enhanced/assets/jquery.min.js"')
-        .replaceFirst('"summernote-lite.min.css"', '"assets/packages/html_editor_enhanced/assets/summernote-lite.min.css"')
-        .replaceFirst('"summernote-lite.min.js"', '"assets/packages/html_editor_enhanced/assets/summernote-lite.min.js"');
+        .replaceFirst('"summernote-bs4.min.css"', '"assets/packages/html_editor_enhanced/assets//summernote-0.9.0/summernote-bs4.min.css"')
+        .replaceFirst('"summernote-bs4.min.js"', '"assets/packages/html_editor_enhanced/assets//summernote-0.9.0/summernote-bs4.min.js"')
+        .replaceFirst('"summernote-lite.min.css"', '"assets/packages/html_editor_enhanced/assets/summernote-0.9.0/summernote-lite.min.css"')
+        .replaceFirst('"summernote-lite.min.js"', '"assets/packages/html_editor_enhanced/assets/summernote-0.9.0/summernote-lite.min.js"');
     if (widget.callbacks != null) addJSListener(widget.callbacks!);
 
     final iframe = html.IFrameElement()
