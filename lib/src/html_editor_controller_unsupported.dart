@@ -173,4 +173,6 @@ class HtmlEditorController {
   void insertTable(String dimensions) {}
 
   Future<bool> isCodeView() => Future.value(false);
+
+  void newClear() {}
 }

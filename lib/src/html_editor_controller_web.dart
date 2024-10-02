@@ -352,4 +352,17 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
       throw Exception('Non-Flutter Web environment detected, please make sure you are importing package:html_editor_enhanced/html_editor.dart');
     }
   }
+
+  @override
+  void newClear() async {
+    final isCodeView = await this.isCodeView();
+
+    if (isCodeView) {
+      this.clear();
+      this.setText('');
+      this.toggleCodeView();
+    } else {
+      this.setText('');
+    }
+  }
 }
