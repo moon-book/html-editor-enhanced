@@ -245,6 +245,10 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
           if (e && e.data && e.data.includes("toIframe:")) {
             var data = JSON.parse(e.data);
             if (data["view"].includes("$createdViewId")) {
+              if (data["type"].includes("isCodeView")) {
+                var isCodeViewActivated = \$('#summernote-2').summernote('codeview.isActivated');
+                window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: isCodeView", "data": isCodeViewActivated}), "*");
+              }
               if (data["type"].includes("getText")) {
                 var str = \$('#summernote-2').summernote('code');
                 window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: getText", "text": str}), "*");

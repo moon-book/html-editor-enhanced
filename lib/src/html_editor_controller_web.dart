@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
@@ -312,6 +313,19 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   void removeNotification() {
     _evaluateJavascriptWeb(data: {'type': 'toIframe: removeNotification'});
     recalculateHeight();
+  }
+
+  @override
+  Future<bool> isCodeView() async {
+    _evaluateJavascriptWeb(data: {'type': 'toIframe: isCodeView'});
+    var e = await html.window.onMessage.firstWhere((element) {
+      final jsonMsg = json.decode(element.data);
+      return jsonMsg['type'] == 'toDart: isCodeView' && jsonMsg['view'] == _viewId;
+    });
+
+    final isCodeView = json.decode(e.data)['data'] as bool?;
+
+    return isCodeView ?? false;
   }
 
   /// Helper function to process input html
