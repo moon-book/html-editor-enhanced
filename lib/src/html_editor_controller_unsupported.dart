@@ -171,4 +171,8 @@ class HtmlEditorController {
   /// Internal function to insert table on Web
   @internal
   void insertTable(String dimensions) {}
+
+  Future<bool> isCodeView() => Future.value(false);
+
+  void newClear() {}
 }
