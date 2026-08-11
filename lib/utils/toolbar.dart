@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:html_editor_enhanced/src/widgets/toolbars/toolbar_button.dart';
 
@@ -57,7 +56,7 @@ class FontButtons extends Toolbar {
       if (bold)
         ToolbarButton(
           type: ButtonType.bold,
-          child: FaIcon(
+          child: Icon(
             HotFixFontAwesomeIcons.bold.iconData,
             size: 14,
           ),
