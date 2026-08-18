@@ -65,7 +65,7 @@ class FontButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.italic,
           child: Icon(
-            FontAwesomeIcons.italic,
+            FontAwesomeIcons.italic.data,
             size: 14,
           ),
           tooltip: 'In Nghiêng',
@@ -74,7 +74,7 @@ class FontButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.underline,
           child: Icon(
-            FontAwesomeIcons.underline,
+            FontAwesomeIcons.underline.data,
             size: 14,
           ),
           tooltip: 'Gạch dưới',
@@ -83,7 +83,7 @@ class FontButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.clearFormatting,
           child: Icon(
-            FontAwesomeIcons.eraser,
+            FontAwesomeIcons.eraser.data,
             size: 14,
           ),
           tooltip: 'Bỏ định dạng',
@@ -98,7 +98,7 @@ class FontButtons extends Toolbar {
       if (strikethrough)
         ToolbarButton(
           child: Icon(
-            FontAwesomeIcons.strikethrough,
+            FontAwesomeIcons.strikethrough.data,
             size: 14,
           ),
           type: ButtonType.strikethrough,
@@ -107,7 +107,7 @@ class FontButtons extends Toolbar {
       if (superscript)
         ToolbarButton(
           child: Icon(
-            FontAwesomeIcons.superscript,
+            FontAwesomeIcons.superscript.data,
             size: 14,
           ),
           type: ButtonType.superscript,
@@ -116,7 +116,7 @@ class FontButtons extends Toolbar {
       if (subscript)
         ToolbarButton(
           child: Icon(
-            FontAwesomeIcons.subscript,
+            FontAwesomeIcons.subscript.data,
             size: 14,
           ),
           type: ButtonType.subscript,
@@ -160,7 +160,7 @@ class ColorButtons extends Toolbar {
           child: Container(
             color: Colors.yellow,
             child: Icon(
-              FontAwesomeIcons.font,
+              FontAwesomeIcons.font.data,
               size: 14,
             ),
           ),
@@ -172,7 +172,7 @@ class ColorButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.highlightColor,
           child: Icon(
-            FontAwesomeIcons.brush,
+            FontAwesomeIcons.brush.data,
             size: 14,
           ),
           tooltip: 'Màu nền',
@@ -201,7 +201,7 @@ class ListButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.ul,
           child: Icon(
-            FontAwesomeIcons.listUl,
+            FontAwesomeIcons.listUl.data,
             size: 14,
           ),
           tooltip: 'Liệt kê danh sách',
@@ -212,7 +212,7 @@ class ListButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.ol,
           child: Icon(
-            FontAwesomeIcons.listOl,
+            FontAwesomeIcons.listOl.data,
             size: 14,
           ),
           tooltip: 'Liệt kê theo thứ tự',
@@ -253,7 +253,7 @@ class ParagraphButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.alignLeft,
           child: Icon(
-            FontAwesomeIcons.alignLeft,
+            FontAwesomeIcons.alignLeft.data,
             size: 14,
           ),
           tooltip: 'Căn trái',
@@ -264,7 +264,7 @@ class ParagraphButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.alignCenter,
           child: Icon(
-            FontAwesomeIcons.alignCenter,
+            FontAwesomeIcons.alignCenter.data,
             size: 14,
           ),
           tooltip: 'Căn giữa',
@@ -275,7 +275,7 @@ class ParagraphButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.alignRight,
           child: Icon(
-            FontAwesomeIcons.alignRight,
+            FontAwesomeIcons.alignRight.data,
             size: 14,
           ),
           tooltip: 'Căn phải',
@@ -286,7 +286,7 @@ class ParagraphButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.alignJustify,
           child: Icon(
-            FontAwesomeIcons.alignJustify,
+            FontAwesomeIcons.alignJustify.data,
             size: 14,
           ),
           tooltip: 'Căn đều',
@@ -302,7 +302,7 @@ class ParagraphButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.increaseIndent,
           child: Icon(
-            FontAwesomeIcons.indent,
+            FontAwesomeIcons.indent.data,
             size: 14,
           ),
           tooltip: 'Dịch sang phải',
@@ -313,7 +313,7 @@ class ParagraphButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.decreaseIndent,
           child: Icon(
-            FontAwesomeIcons.outdent,
+            FontAwesomeIcons.outdent.data,
             size: 14,
           ),
           tooltip: 'Dịch sang trái',
@@ -371,7 +371,7 @@ class InsertButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.link,
           child: Icon(
-            FontAwesomeIcons.link,
+            FontAwesomeIcons.link.data,
             size: 14,
           ),
           tooltip: 'Link',
@@ -383,7 +383,7 @@ class InsertButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.picture,
           child: Icon(
-            FontAwesomeIcons.image,
+            FontAwesomeIcons.image.data,
             size: 14,
           ),
           tooltip: 'Hình ảnh',
@@ -395,7 +395,7 @@ class InsertButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.audio,
           child: Icon(
-            FontAwesomeIcons.fileAudio,
+            FontAwesomeIcons.fileAudio.data,
             size: 14,
           ),
           tooltip: 'Audio',
@@ -406,7 +406,7 @@ class InsertButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.video,
           child: Icon(
-            FontAwesomeIcons.video,
+            FontAwesomeIcons.video.data,
             size: 14,
           ),
           tooltip: 'Video',
@@ -417,7 +417,7 @@ class InsertButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.otherFile,
           child: Icon(
-            FontAwesomeIcons.file,
+            FontAwesomeIcons.file.data,
             size: 14,
           ),
           tooltip: 'File',
@@ -428,7 +428,7 @@ class InsertButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.table,
           child: Icon(
-            FontAwesomeIcons.table,
+            FontAwesomeIcons.table.data,
             size: 14,
           ),
           tooltip: 'Table',
@@ -476,7 +476,7 @@ class OtherButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.fullscreen,
           child: Icon(
-            FontAwesomeIcons.maximize,
+            FontAwesomeIcons.maximize.data,
             size: 14,
           ),
           tooltip: 'Toàn Màn hình',
@@ -490,7 +490,7 @@ class OtherButtons extends Toolbar {
           child: Container(
             padding: EdgeInsets.only(right: 2),
             child: Icon(
-              FontAwesomeIcons.code,
+              FontAwesomeIcons.code.data,
               size: 13,
             ),
           ),
@@ -502,7 +502,7 @@ class OtherButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.undo,
           child: Icon(
-            FontAwesomeIcons.arrowRotateLeft,
+            FontAwesomeIcons.arrowRotateLeft.data,
             size: 14,
           ),
           tooltip: 'Undo',
@@ -513,7 +513,7 @@ class OtherButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.redo,
           child: Icon(
-            FontAwesomeIcons.arrowRotateRight,
+            FontAwesomeIcons.arrowRotateRight.data,
             size: 14,
           ),
           tooltip: 'Redo',
@@ -524,7 +524,7 @@ class OtherButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.help,
           child: Icon(
-            FontAwesomeIcons.question,
+            FontAwesomeIcons.question.data,
             size: 14,
           ),
           tooltip: 'Trợ giúp',
@@ -540,7 +540,7 @@ class OtherButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.copy,
           child: Icon(
-            FontAwesomeIcons.copy,
+            FontAwesomeIcons.copy.data,
             size: 14,
           ),
           tooltip: 'Copy',
@@ -551,7 +551,7 @@ class OtherButtons extends Toolbar {
         ToolbarButton(
           type: ButtonType.paste,
           child: Icon(
-            FontAwesomeIcons.paste,
+            FontAwesomeIcons.paste.data,
             size: 14,
           ),
           tooltip: 'Paste',
