@@ -100,6 +100,11 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
           \$('.note-editable').css('background-color', 'white');
           \$('#summernote-2').summernote('code', '');
         },
+        ${widget.htmlEditorOptions.shouldEnsureVisible ? '''
+        onFocus: function(e) {
+          window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: editorFocused"}), "*");
+        },
+        ''' : ''}
     ''';
     var maximumFileSize = 10485760;
     for (var p in widget.plugins) {
@@ -234,6 +239,10 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
           });
           
           \$('#summernote-2').on('summernote.change', function(_, contents, \$editable) {
+            var firstParagraph = document.querySelector('.note-editable p');
+            if (firstParagraph) {
+              var paragraphStyle = window.getComputedStyle(firstParagraph);
+            }
             window.parent.postMessage(JSON.stringify({"view": "$createdViewId", "type": "toDart: onChangeContent", "contents": contents}), "*");
           });
         });
@@ -519,9 +528,12 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
             }
           }
           if (data['type'] != null && data['type'].contains('toDart: onChangeContent') && data['view'] == createdViewId) {
+            final contents = data['contents'];
             if (widget.callbacks != null && widget.callbacks!.onChangeContent != null) {
-              widget.callbacks!.onChangeContent!.call(data['contents']);
+              widget.callbacks!.onChangeContent!.call(contents);
             }
+          }
+          if (data['type'] != null && data['type'].contains('toDart: editorFocused') && data['view'] == createdViewId) {
             if (widget.htmlEditorOptions.shouldEnsureVisible) {
               Scrollable.of(context)
                   .position

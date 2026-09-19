@@ -156,87 +156,69 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
     String listType = json['listStyle'] ?? '';
     //get text direction
     String textDir = json['direction'] ?? 'ltr';
-    //check the parent element if it matches one of the predetermined styles and update the toolbar
-    if (['pre', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].contains(parentElem)) {
-      setState(mounted, this.setState, () {
-        _fontSelectedItem = parentElem;
-      });
-    } else {
-      setState(mounted, this.setState, () {
-        _fontSelectedItem = 'p';
-      });
-    }
-    //check the font name if it matches one of the predetermined fonts and update the toolbar
-    if (['Courier New', 'sans-serif', 'Times New Roman'].contains(fontName)) {
-      setState(mounted, this.setState, () {
-        _fontNameSelectedItem = fontName;
-      });
-    } else {
-      setState(mounted, this.setState, () {
-        _fontNameSelectedItem = 'sans-serif';
-      });
-    }
-    //update the fore/back selected color if necessary
+    // debugPrint('[Flutter][toolbar-update] style=$parentElem fontName=$fontName fontSize=$fontSize lineHeight=$lineHeight direction=$textDir');
+
+    Color foreColor = Colors.black;
+    Color backColor = Colors.yellow;
     if (colorList[0] != null && colorList[0]!.isNotEmpty) {
-      setState(mounted, this.setState, () {
+      try {
         var rgb = colorList[0]!.replaceAll('rgb(', '').replaceAll(')', '');
         var rgbList = rgb.split(', ');
-        _foreColorSelected = Color.fromRGBO(int.parse(rgbList[0]), int.parse(rgbList[1]), int.parse(rgbList[2]), 1);
-      });
-    } else {
-      setState(mounted, this.setState, () {
-        _foreColorSelected = Colors.black;
-      });
+        foreColor = Color.fromRGBO(int.parse(rgbList[0]), int.parse(rgbList[1]), int.parse(rgbList[2]), 1);
+      } catch (_) {}
     }
     if (colorList[1] != null && colorList[1]!.isNotEmpty) {
-      setState(mounted, this.setState, () {
-        _backColorSelected = Color(int.parse(colorList[1]!, radix: 16) + 0xFF000000);
-      });
-    } else {
-      setState(mounted, this.setState, () {
-        _backColorSelected = Colors.yellow;
-      });
+      try {
+        backColor = Color(int.parse(colorList[1]!, radix: 16) + 0xFF000000);
+      } catch (_) {}
     }
-    //check the list style if it matches one of the predetermined styles and update the toolbar
-    if (['decimal', 'lower-alpha', 'upper-alpha', 'lower-roman', 'upper-roman', 'disc', 'circle', 'square'].contains(listType)) {
-      setState(mounted, this.setState, () {
-        _listStyleSelectedItem = listType;
-      });
-    } else {
-      _listStyleSelectedItem = null;
-    }
-    //update the lineheight selected item if necessary
+
+    double? nextLineHeight;
     if (lineHeight.isNotEmpty && lineHeight.endsWith('px')) {
       var lineHeightDouble = double.tryParse(lineHeight.replaceAll('px', '')) ?? 16;
       var lineHeights = <double>[1, 1.2, 1.4, 1.5, 1.6, 1.8, 2, 3];
       lineHeights = lineHeights.map((e) => e * _actualFontSizeSelectedItem).toList();
       if (lineHeights.contains(lineHeightDouble)) {
-        setState(mounted, this.setState, () {
-          _lineHeightSelectedItem = lineHeightDouble / _actualFontSizeSelectedItem;
-        });
+        nextLineHeight = lineHeightDouble / _actualFontSizeSelectedItem;
       }
     } else if (lineHeight == 'normal') {
-      setState(mounted, this.setState, () {
-        _lineHeightSelectedItem = 1.0;
-      });
+      nextLineHeight = 1.0;
     }
-    //check if the font size matches one of the predetermined sizes and update the toolbar
-    if ([1, 2, 3, 4, 5, 6, 7].contains(fontSize)) {
-      setState(mounted, this.setState, () {
-        _fontSizeSelectedItem = fontSize;
-      });
-    }
-    if (textDir == 'ltr') {
-      setState(mounted, this.setState, () {
-        _textDirectionSelected = [true, false];
-      });
-    } else if (textDir == 'rtl') {
-      setState(mounted, this.setState, () {
-        _textDirectionSelected = [false, true];
-      });
-    }
-    //use the remaining bool lists to update the selected items accordingly
+
     setState(mounted, this.setState, () {
+      //check the parent element if it matches one of the predetermined styles and update the toolbar
+      if (['pre', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].contains(parentElem)) {
+        _fontSelectedItem = parentElem;
+      } else {
+        _fontSelectedItem = 'p';
+      }
+      //check the font name if it matches one of the predetermined fonts and update the toolbar
+      if (['Courier New', 'sans-serif', 'Times New Roman'].contains(fontName)) {
+        _fontNameSelectedItem = fontName;
+      } else {
+        _fontNameSelectedItem = 'sans-serif';
+      }
+      _foreColorSelected = foreColor;
+      _backColorSelected = backColor;
+      //check the list style if it matches one of the predetermined styles and update the toolbar
+      if (['decimal', 'lower-alpha', 'upper-alpha', 'lower-roman', 'upper-roman', 'disc', 'circle', 'square'].contains(listType)) {
+        _listStyleSelectedItem = listType;
+      } else {
+        _listStyleSelectedItem = null;
+      }
+      if (nextLineHeight != null) {
+        _lineHeightSelectedItem = nextLineHeight!;
+      }
+      //check if the font size matches one of the predetermined sizes and update the toolbar
+      if ([1, 2, 3, 4, 5, 6, 7].contains(fontSize)) {
+        _fontSizeSelectedItem = fontSize;
+      }
+      if (textDir == 'ltr') {
+        _textDirectionSelected = [true, false];
+      } else if (textDir == 'rtl') {
+        _textDirectionSelected = [false, true];
+      }
+      //use the remaining bool lists to update the selected items accordingly
       for (var t in widget.htmlToolbarOptions.defaultToolbarButtons) {
         if (t is FontButtons) {
           for (var i = 0; i < _fontSelected.length; i++) {
