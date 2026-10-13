@@ -12,6 +12,8 @@ class HtmlEditorOptions {
     this.androidUseHybridComposition = true,
     this.adjustHeightForKeyboard = true,
     this.characterLimit,
+    this.codeViewBgColor,
+    this.codeViewTextColor,
     this.customOptions = '',
     this.darkMode,
     this.disabled = false,
@@ -56,6 +58,16 @@ class HtmlEditorOptions {
   ///
   /// NOTE: ONLY WORKS ON iOS AND WEB PLATFORMS!!
   final int? characterLimit;
+
+  /// Sets the background color of the HTML code view.
+  ///
+  /// When null, Summernote's default code view background color is used.
+  final Color? codeViewBgColor;
+
+  /// Sets the text color of the HTML code view.
+  ///
+  /// When null, Summernote's default code view text color is used.
+  final Color? codeViewTextColor;
 
   /// Set custom options for the summernote editor by using their syntax.
   ///

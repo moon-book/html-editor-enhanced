@@ -441,6 +441,28 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                             '<link href=\"${(widget.htmlEditorOptions.filePath != null ? "file:///android_asset/flutter_assets/packages/html_editor_enhanced/assets/" : "") + "summernote-lite-dark.css"}\" rel=\"stylesheet\">';
                         await controller.evaluateJavascript(source: "\$('head').append('$darkCSS');");
                       }
+                      if (widget.htmlEditorOptions.codeViewBgColor != null) {
+                        final codeViewBgColor =
+                            // ignore: deprecated_member_use
+                            '#${(widget.htmlEditorOptions.codeViewBgColor!.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+                        await controller.evaluateJavascript(source: """
+                          var codeView = document.querySelector('.note-codable');
+                          if (codeView) {
+                            codeView.style.setProperty('background-color', '$codeViewBgColor', 'important');
+                          }
+                        """);
+                      }
+                      if (widget.htmlEditorOptions.codeViewTextColor != null) {
+                        final codeViewTextColor =
+                            // ignore: deprecated_member_use
+                            '#${(widget.htmlEditorOptions.codeViewTextColor!.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+                        await controller.evaluateJavascript(source: """
+                          var codeView = document.querySelector('.note-codable');
+                          if (codeView) {
+                            codeView.style.setProperty('color', '$codeViewTextColor', 'important');
+                          }
+                        """);
+                      }
                       //set the text once the editor is loaded
                       if (widget.htmlEditorOptions.initialText != null) {
                         widget.controller.setText(widget.htmlEditorOptions.initialText!);

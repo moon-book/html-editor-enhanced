@@ -198,6 +198,18 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
         widget.htmlEditorOptions.darkMode != false) {
       darkCSS = '<link href=\"assets/packages/html_editor_enhanced/assets/summernote-lite-dark.css\" rel=\"stylesheet\">';
     }
+    if (widget.htmlEditorOptions.codeViewBgColor != null) {
+      final codeViewBgColor =
+          // ignore: deprecated_member_use
+          '#${(widget.htmlEditorOptions.codeViewBgColor!.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+      darkCSS += '<style>.note-codable { background-color: $codeViewBgColor !important; }</style>';
+    }
+    if (widget.htmlEditorOptions.codeViewTextColor != null) {
+      final codeViewTextColor =
+          // ignore: deprecated_member_use
+          '#${(widget.htmlEditorOptions.codeViewTextColor!.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+      darkCSS += '<style>.note-codable { color: $codeViewTextColor !important; }</style>';
+    }
     var jsCallbacks = '';
     if (widget.callbacks != null) {
       jsCallbacks = getJsCallbacks(widget.callbacks!);
@@ -287,6 +299,12 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
               }
               if (data["type"].includes("toggleCodeview")) {
                 \$('#summernote-2').summernote('codeview.toggle');
+              }
+              if (data["type"].includes("setCodeView")) {
+                var isCodeViewActivated = \$('#summernote-2').summernote('codeview.isActivated');
+                if (isCodeViewActivated !== data["enabled"]) {
+                  \$('#summernote-2').summernote('codeview.toggle');
+                }
               }
               if (data["type"].includes("disable")) {
                 \$('#summernote-2').summernote('disable');

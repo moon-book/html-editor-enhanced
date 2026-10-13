@@ -149,6 +149,10 @@ class HtmlEditorController {
   /// toggles the codeview in the Html editor
   void toggleCodeView() {}
 
+  /// Switches the editor to code view when [enabled] is true, or normal view
+  /// when it is false.
+  void setCodeView(bool enabled) {}
+
   /// Undoes the last action
   void undo() {}
 

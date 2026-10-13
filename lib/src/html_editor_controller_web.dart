@@ -115,6 +115,14 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
     _evaluateJavascriptWeb(data: {'type': 'toIframe: toggleCodeview'});
   }
 
+  /// Switches the editor to code view when [enabled] is true, or normal view
+  /// when it is false.
+  @override
+  void setCodeView(bool enabled) {
+    _evaluateJavascriptWeb(
+        data: {'type': 'toIframe: setCodeView', 'enabled': enabled});
+  }
+
   /// disables the Html editor
   @override
   void disable() {

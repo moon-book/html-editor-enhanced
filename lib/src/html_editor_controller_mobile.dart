@@ -120,6 +120,26 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
         source: "\$('#summernote-2').summernote('codeview.toggle');");
   }
 
+  /// Switches the editor to code view when [enabled] is true, or normal view
+  /// when it is false.
+  @override
+  void setCodeView(bool enabled) {
+    _evaluateJavascript(source: """
+      var isCodeViewActivated = \$('#summernote-2').summernote('codeview.isActivated');
+      if (isCodeViewActivated !== $enabled) {
+        \$('#summernote-2').summernote('codeview.toggle');
+      }
+    """);
+  }
+
+  /// Returns whether the editor is currently in code view.
+  @override
+  Future<bool> isCodeView() async {
+    final result = await _evaluateJavascript(
+        source: "\$('#summernote-2').summernote('codeview.isActivated');");
+    return result == true;
+  }
+
   /// disables the Html editor
   @override
   void disable() {
