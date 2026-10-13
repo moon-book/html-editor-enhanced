@@ -45,6 +45,10 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   /// Manages the view ID for the [HtmlEditorController] on web
   String? _viewId;
 
+  int _setTextRequestId = 0;
+
+  static const Duration _setTextTimeout = Duration(seconds: 5);
+
   /// Internal method to set the view ID when iframe initialization
   /// is complete
   @override
@@ -79,9 +83,59 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   /// Sets the text of the editor. Some pre-processing is applied to convert
   /// [String] elements like "\n" to HTML elements.
   @override
-  void setText(String text) {
+  Future<void> setText(String text) async {
     text = _processHtml(html: text);
-    _evaluateJavascriptWeb(data: {'type': 'toIframe: setText', 'text': text});
+    final requestId = ++_setTextRequestId;
+    final response = _waitForSetTextResponse(requestId);
+
+    _evaluateJavascriptWeb(data: {
+      'type': 'toIframe: setText',
+      'text': text,
+      'requestId': requestId,
+    });
+
+    final jsonMsg = await response;
+    if (jsonMsg['success'] != true) {
+      throw StateError(
+        'The HTML editor failed to set its text: ${jsonMsg['error'] ?? 'unknown error'}',
+      );
+    }
+  }
+
+  Future<Map<String, dynamic>> _waitForSetTextResponse(int requestId) {
+    final completer = Completer<Map<String, dynamic>>();
+    late StreamSubscription<html.MessageEvent> subscription;
+    late Timer timeout;
+
+    subscription = html.window.onMessage.listen((element) {
+      try {
+        final jsonMsg = json.decode(element.data);
+        if (jsonMsg is! Map<String, dynamic> ||
+            jsonMsg['type'] != 'toDart: setText' ||
+            jsonMsg['view'] != _viewId ||
+            jsonMsg['requestId'] != requestId) {
+          return;
+        }
+
+        timeout.cancel();
+        subscription.cancel();
+        completer.complete(jsonMsg);
+      } catch (_) {
+        // Ignore messages that are not JSON messages for this editor.
+      }
+    });
+
+    timeout = Timer(_setTextTimeout, () {
+      subscription.cancel();
+      completer.completeError(
+        TimeoutException(
+          'Timed out waiting for the HTML editor to set its text.',
+          _setTextTimeout,
+        ),
+      );
+    });
+
+    return completer.future;
   }
 
   /// Sets the editor to full-screen mode.

@@ -80,9 +80,9 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   /// Sets the text of the editor. Some pre-processing is applied to convert
   /// [String] elements like "\n" to HTML elements.
   @override
-  void setText(String text) {
+  Future<void> setText(String text) async {
     text = _processHtml(html: text);
-    _evaluateJavascript(
+    await _evaluateJavascript(
         source: "\$('#summernote-2').summernote('code', '$text');");
   }
 

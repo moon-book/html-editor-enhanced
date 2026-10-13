@@ -144,7 +144,7 @@ class HtmlEditorController {
 
   /// Sets the text of the editor. Some pre-processing is applied to convert
   /// [String] elements like "\n" to HTML elements.
-  void setText(String text) {}
+  Future<void> setText(String text) async {}
 
   /// toggles the codeview in the Html editor
   void toggleCodeView() {}

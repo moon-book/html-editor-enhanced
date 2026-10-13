@@ -283,7 +283,23 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
                 document.getElementsByClassName('note-editable')[0].setAttribute('inputmode', '${describeEnum(widget.htmlEditorOptions.inputType)}');
               }
               if (data["type"].includes("setText")) {
-                \$('#summernote-2').summernote('code', data["text"]);
+                try {
+                  \$('#summernote-2').summernote('code', data["text"]);
+                  window.parent.postMessage(JSON.stringify({
+                    "view": "$createdViewId",
+                    "type": "toDart: setText",
+                    "requestId": data["requestId"],
+                    "success": true
+                  }), "*");
+                } catch (error) {
+                  window.parent.postMessage(JSON.stringify({
+                    "view": "$createdViewId",
+                    "type": "toDart: setText",
+                    "requestId": data["requestId"],
+                    "success": false,
+                    "error": String(error)
+                  }), "*");
+                }
               }
               if (data["type"].includes("setFullScreen")) {
                 \$("#summernote-2").summernote("fullscreen.toggle");
