@@ -96,7 +96,20 @@ class HtmlEditorController extends unsupported.HtmlEditorController {
   /// Sets the focus to the editor.
   @override
   void setFocus() {
-    _evaluateJavascript(source: "\$('#summernote-2').summernote('focus');");
+    _evaluateJavascript(source: """
+      var editor = \$('#summernote-2');
+      if (editor.summernote('codeview.isActivated')) {
+        var codable = editor.data('summernote').layoutInfo.codable;
+        var cmEditor = codable.data('cmEditor');
+        if (cmEditor) {
+          cmEditor.focus();
+        } else {
+          codable.trigger('focus');
+        }
+      } else {
+        editor.summernote('focus');
+      }
+    """);
   }
 
   /// Clears the editor of any text.

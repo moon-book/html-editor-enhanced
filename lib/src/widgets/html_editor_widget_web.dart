@@ -305,7 +305,18 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
                 \$("#summernote-2").summernote("fullscreen.toggle");
               }
               if (data["type"].includes("setFocus")) {
-                \$('#summernote-2').summernote('focus');
+                var editor = \$('#summernote-2');
+                if (editor.summernote('codeview.isActivated')) {
+                  var codable = editor.data('summernote').layoutInfo.codable;
+                  var cmEditor = codable.data('cmEditor');
+                  if (cmEditor) {
+                    cmEditor.focus();
+                  } else {
+                    codable.trigger('focus');
+                  }
+                } else {
+                  editor.summernote('focus');
+                }
               }
               if (data["type"].includes("clear")) {
                 \$('#summernote-2').summernote('reset');
