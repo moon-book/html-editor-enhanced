@@ -285,6 +285,7 @@ class _HtmlEditorWidgetWebState extends State<HtmlEditorWidget> {
               if (data["type"].includes("setText")) {
                 try {
                   \$('#summernote-2').summernote('code', data["text"]);
+                  \$('.note-codable').val(data["text"]);
                   window.parent.postMessage(JSON.stringify({
                     "view": "$createdViewId",
                     "type": "toDart: setText",
